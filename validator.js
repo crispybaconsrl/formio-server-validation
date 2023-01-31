@@ -2,7 +2,6 @@ const Validator = require('formio/src/resources/Validator');
 const hook = require('formio/src/util/hook')({});
 
 const _Validator = Validator;
-_Validator.setHook(hook);
 
 const submissionModel = function(doc, field, skipId) {};
 
@@ -15,7 +14,7 @@ const submissionModel = function(doc, field, skipId) {};
  * @throws {Object} - An error object containing a `system` property for system errors or a `validation` property for validation errors.
  */
 async function validate(schema, data) {
-  const validator = new _Validator(schema, submissionModel, {}, {});
+  const validator = new _Validator(schema, submissionModel, {}, {}, hook);
   const body = {data, metadata: {}};
 
   const handler = (body) => new Promise((resolve, reject) => {
